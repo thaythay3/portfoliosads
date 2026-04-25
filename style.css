@@ -1,56 +1,120 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Estilo Geral da Página */
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-h1 {
-  margin: 20px;
+/* Banner da Logo (Etapa 4) */
+.logo-container {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-.container {
-  display: grid;
-  gap: 10px;
-  padding: 10px;
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Simula o centerCrop do Android */
 }
 
-.box {
-  background-color: #007BFF;
-  color: white;
-  padding: 40px;
-  font-size: 20px;
-  border-radius: 8px;
+/* Estilo de Texto Padronizado (Etapa 3 do Roteiro) */
+.estilo-texto {
+    display: block;
+    text-transform: uppercase; /* Letras maiúsculas */
+    font-size: 15px;           /* Tamanho 15sp */
+    padding-top: 16px;         /* Padding superior 16dp */
+    padding-bottom: 16px;      /* Padding inferior 16dp */
+    font-weight: bold;
+    color: #555;
 }
 
-/* Desktop */
-@media (min-width: 1280px) {
-  .container {
-    grid-template-columns: repeat(6, 1fr);
-  }
+/* Campos de Entrada e Checkboxes */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-/* Tablet */
-@media (min-width: 768px) and (max-width: 1279px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.checkbox-group {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Médio */
-@media (min-width: 480px) and (max-width: 767px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.checkbox-item {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
 }
 
-/* Celular */
-@media (max-width: 479px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
+/* Seletor de Quantidade (Etapa 5) */
+.quantidade-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.btn-qtd {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: #6200EE; /* Cor primária do Android */
+    color: white;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.btn-qtd:hover {
+    background-color: #3700B3;
+}
+
+#txtQuantidade {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Botão Enviar (Etapa 6) */
+.btn-enviar {
+    width: 100%;
+    padding: 15px;
+    background-color: #03DAC5; /* Cor secundária do Android */
+    color: black;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.btn-enviar:hover {
+    background-color: #018786;
+}
+
+/* Resumo do Pedido */
+.resumo-box {
+    margin-top: 10px;
+    padding: 15px;
+    background: #fff;
+    border-left: 5px solid #6200EE;
+    border-radius: 4px;
+    min-height: 100px;
+    white-space: pre-line; /* Mantém as quebras de linha do resumo */
 }
