@@ -1,0 +1,19 @@
+# HamburgueriaZ 🍔
+
+Projeto desenvolvido com base na proposta da disciplina de Desenvolvimento Mobile.
+
+## Funcionalidades
+- Inserção do nome do cliente
+- Seleção de adicionais (bacon, queijo, onion rings)
+- Controle de quantidade
+- Cálculo automático do valor total
+- Geração de resumo do pedido
+
+
+## Tecnologias utilizadas
+- HTML
+- CSS
+- JavaScript
+
+## Observação
+Devido a limitações de hardware, o projeto foi desenvolvido em ambiente web simulando a lógica de uma aplicação mobile.
