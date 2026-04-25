@@ -1,93 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HamburgueriaZ - App</title>
-    <!-- Conecta com o seu arquivo style.css -->
+    <title>HamburgueriaZ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Etapa 4: Logo -->
-    <div class="logo-container">
-        <img src="https://via.placeholder.com/600x300/496d89/ffff00?text=HamburgueriaZ" alt="Logo HamburgueriaZ">
+<div class="container">
+    <h1>Faça seu pedido</h1>
+
+    <input type="text" id="nome" placeholder="Seu nome">
+
+    <div class="opcoes">
+        <label><input type="checkbox" id="bacon"> Bacon (+R$2)</label>
+        <label><input type="checkbox" id="queijo"> Queijo (+R$2)</label>
+        <label><input type="checkbox" id="onion"> Onion Rings (+R$3)</label>
     </div>
 
-    <!-- Etapa 3: Estilo de Texto Padronizado -->
-    <label class="estilo-texto">Faça seu pedido</label>
-    <input type="text" id="nomeCliente" placeholder="Digite seu nome">
-
-    <div class="checkbox-group">
-        <div class="checkbox-item">
-            <input type="checkbox" id="cbBacon"> <label for="cbBacon">Bacon (R$ 2,00 )</label>
-        </div>
-        <div class="checkbox-item">
-            <input type="checkbox" id="cbQueijo"> <label for="cbQueijo">Queijo (R$ 2,00)</label>
-        </div>
-        <div class="checkbox-item">
-            <input type="checkbox" id="cbOnion"> <label for="cbOnion">Onion Rings (R$ 3,00)</label>
-        </div>
+    <div class="quantidade">
+        <button onclick="subtrair()">-</button>
+        <span id="qtd">1</span>
+        <button onclick="somar()">+</button>
     </div>
 
-    <label class="estilo-texto">Quantidade</label>
-    <div class="quantidade-container">
-        <button class="btn-qtd" onclick="subtrair()">-</button>
-        <span id="txtQuantidade">1</span>
-        <button class="btn-qtd" onclick="somar()">+</button>
-    </div>
+    <button class="btn" onclick="enviarPedido()">Enviar Pedido</button>
 
-    <!-- Etapa 6: Botão Enviar -->
-    <button class="btn-enviar" onclick="enviarPedido()">Enviar Pedido</button>
+    <pre id="resultado"></pre>
+</div>
 
-    <label class="estilo-texto">Resumo do pedido</label>
-    <div id="resumoPedido" class="resumo-box">
-        Preço final: R$ 0,00
-    </div>
+<script>
+let quantidade = 1;
 
-    <script>
-        let quantidade = 1;
-        const precoBase = 20;
+function somar(){
+    quantidade++;
+    atualizar();
+}
 
-        function somar() {
-            quantidade++;
-            document.getElementById('txtQuantidade').innerText = quantidade;
-        }
+function subtrair(){
+    if(quantidade > 1){
+        quantidade--;
+    }
+    atualizar();
+}
 
-        function subtrair() {
-            if (quantidade > 1) {
-                quantidade--;
-                document.getElementById('txtQuantidade').innerText = quantidade;
-            }
-        }
+function atualizar(){
+    document.getElementById("qtd").innerText = quantidade;
+}
 
-        function enviarPedido() {
-            const nome = document.getElementById('nomeCliente').value;
-            const temBacon = document.getElementById('cbBacon').checked;
-            const temQueijo = document.getElementById('cbQueijo').checked;
-            const temOnion = document.getElementById('cbOnion').checked;
+function enviarPedido(){
+    let nome = document.getElementById("nome").value;
+    let bacon = document.getElementById("bacon").checked;
+    let queijo = document.getElementById("queijo").checked;
+    let onion = document.getElementById("onion").checked;
 
-            let precoUnitario = precoBase;
-            if (temBacon) precoUnitario += 2;
-            if (temQueijo) precoUnitario += 2;
-            if (temOnion) precoUnitario += 3;
-            
-            const precoTotal = precoUnitario * quantidade;
+    let preco = 20;
+    if(bacon) preco += 2;
+    if(queijo) preco += 2;
+    if(onion) preco += 3;
 
-            const resumoTexto = `Nome do cliente: ${nome || 'Cliente'}\n` +
-                                `Tem Bacon? ${temBacon ? 'Sim' : 'Não'}\n` +
-                                `Tem Queijo? ${temQueijo ? 'Sim' : 'Não'}\n` +
-                                `Tem Onion Rings? ${temOnion ? 'Sim' : 'Não'}\n` +
-                                `Quantidade: ${quantidade}\n` +
-                                `Preço final: R$ ${precoTotal.toFixed(2)}`;
+    preco *= quantidade;
 
-            document.getElementById('resumoPedido').innerText = resumoTexto;
+    let resumo =
+`Nome: ${nome}
+Bacon: ${bacon ? "Sim" : "Não"}
+Queijo: ${queijo ? "Sim" : "Não"}
+Onion Rings: ${onion ? "Sim" : "Não"}
+Quantidade: ${quantidade}
+Preço: R$ ${preco}`;
 
-            // Simula o Intent de E-mail
-            const assunto = encodeURIComponent(`Pedido de ${nome || 'Cliente'}`);
-            const corpo = encodeURIComponent(resumoTexto);
-            window.location.href = `mailto:?subject=${assunto}&body=${corpo}`;
-        }
-    </script>
+    document.getElementById("resultado").innerText = resumo;
+}
+</script>
+
 </body>
 </html>
