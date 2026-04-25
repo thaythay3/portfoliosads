@@ -1,120 +1,70 @@
-/* Estilo Geral da Página */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 20px;
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 
-/* Banner da Logo (Etapa 4) */
-.logo-container {
-    width: 100%;
-    height: 150px;
-    overflow: hidden;
-    border-radius: 8px;
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.logo-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Simula o centerCrop do Android */
-}
-
-/* Estilo de Texto Padronizado (Etapa 3 do Roteiro) */
-.estilo-texto {
-    display: block;
-    text-transform: uppercase; /* Letras maiúsculas */
-    font-size: 15px;           /* Tamanho 15sp */
-    padding-top: 16px;         /* Padding superior 16dp */
-    padding-bottom: 16px;      /* Padding inferior 16dp */
-    font-weight: bold;
-    color: #555;
-}
-
-/* Campos de Entrada e Checkboxes */
 input[type="text"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    padding: 8px;
+    margin-bottom: 15px;
 }
 
-.checkbox-group {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.checkbox-item {
+.opcoes label {
+    display: block;
     margin-bottom: 8px;
-    display: flex;
-    align-items: center;
 }
 
-/* Seletor de Quantidade (Etapa 5) */
-.quantidade-container {
+.quantidade {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    background: white;
+    margin: 15px 0;
+}
+
+.quantidade button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+}
+
+.quantidade span {
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #e60000;
+}
+
+pre {
+    margin-top: 15px;
+    background: #eee;
     padding: 10px;
     border-radius: 8px;
-    justify-content: center;
-}
-
-.btn-qtd {
-    width: 45px;
-    height: 45px;
-    font-size: 24px;
-    cursor: pointer;
-    border: none;
-    background-color: #6200EE; /* Cor primária do Android */
-    color: white;
-    border-radius: 50%;
-    transition: background 0.3s;
-}
-
-.btn-qtd:hover {
-    background-color: #3700B3;
-}
-
-#txtQuantidade {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* Botão Enviar (Etapa 6) */
-.btn-enviar {
-    width: 100%;
-    padding: 15px;
-    background-color: #03DAC5; /* Cor secundária do Android */
-    color: black;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    text-transform: uppercase;
-}
-
-.btn-enviar:hover {
-    background-color: #018786;
-}
-
-/* Resumo do Pedido */
-.resumo-box {
-    margin-top: 10px;
-    padding: 15px;
-    background: #fff;
-    border-left: 5px solid #6200EE;
-    border-radius: 4px;
-    min-height: 100px;
-    white-space: pre-line; /* Mantém as quebras de linha do resumo */
 }
