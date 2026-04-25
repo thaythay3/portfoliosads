@@ -18,9 +18,11 @@ body {
 /* LOGO */
 .logo {
     width: 100%;
-    max-height: 140px;
+    max-width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px auto;
     object-fit: contain;
-    margin-bottom: 15px;
 }
 
 /* TÍTULO */
