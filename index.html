@@ -13,9 +13,9 @@
     <input type="text" id="nome" placeholder="Seu nome">
 
     <div class="opcoes">
-        <label><input type="checkbox" id="bacon"> Bacon (+R$2)</label>
-        <label><input type="checkbox" id="queijo"> Queijo (+R$2)</label>
-        <label><input type="checkbox" id="onion"> Onion Rings (+R$3)</label>
+        <label><input type="checkbox" id="bacon" onchange="atualizarPreco()"> Bacon (+R$2)</label>
+        <label><input type="checkbox" id="queijo" onchange="atualizarPreco()"> Queijo (+R$2)</label>
+        <label><input type="checkbox" id="onion" onchange="atualizarPreco()"> Onion Rings (+R$3)</label>
     </div>
 
     <div class="quantidade">
@@ -24,9 +24,11 @@
         <button onclick="somar()">+</button>
     </div>
 
+    <h3 id="total">Total: R$ 20</h3>
+
     <button class="btn" onclick="enviarPedido()">Enviar Pedido</button>
 
-    <pre id="resultado"></pre>
+    <pre id="resumo"></pre>
 </div>
 
 <script>
@@ -34,32 +36,49 @@ let quantidade = 1;
 
 function somar(){
     quantidade++;
-    atualizar();
+    atualizarQtd();
+    atualizarPreco();
 }
 
 function subtrair(){
     if(quantidade > 1){
         quantidade--;
     }
-    atualizar();
+    atualizarQtd();
+    atualizarPreco();
 }
 
-function atualizar(){
+function atualizarQtd(){
     document.getElementById("qtd").innerText = quantidade;
 }
 
-function enviarPedido(){
-    let nome = document.getElementById("nome").value;
+function calcularPreco(){
     let bacon = document.getElementById("bacon").checked;
     let queijo = document.getElementById("queijo").checked;
     let onion = document.getElementById("onion").checked;
 
     let preco = 20;
+
     if(bacon) preco += 2;
     if(queijo) preco += 2;
     if(onion) preco += 3;
 
-    preco *= quantidade;
+    return preco * quantidade;
+}
+
+function atualizarPreco(){
+    let total = calcularPreco();
+    document.getElementById("total").innerText = "Total: R$ " + total;
+}
+
+function enviarPedido(){
+    let nome = document.getElementById("nome").value;
+
+    let bacon = document.getElementById("bacon").checked;
+    let queijo = document.getElementById("queijo").checked;
+    let onion = document.getElementById("onion").checked;
+
+    let precoFinal = calcularPreco();
 
     let resumo =
 `Nome: ${nome}
@@ -67,9 +86,9 @@ Bacon: ${bacon ? "Sim" : "Não"}
 Queijo: ${queijo ? "Sim" : "Não"}
 Onion Rings: ${onion ? "Sim" : "Não"}
 Quantidade: ${quantidade}
-Preço: R$ ${preco}`;
+Preço final: R$ ${precoFinal}`;
 
-    document.getElementById("resultado").innerText = resumo;
+    document.getElementById("resumo").innerText = resumo;
 }
 </script>
 
