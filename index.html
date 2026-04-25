@@ -1,23 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atividade Responsiva</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HamburgueriaZ</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 400px; margin: auto; }
+        .estilo-texto { text-transform: uppercase; font-size: 15px; padding: 16px 0; font-weight: bold; }
+        .row { display: flex; align-items: center; margin-bottom: 10px; }
+        .row button { width: 40px; height: 40px; font-size: 20px; cursor: pointer; }
+        .row span { margin: 0 15px; font-size: 18px; }
+        input[type="text"] { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+        .resumo { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+        button.enviar { width: 100%; padding: 15px; background: #28a745; color: white; border: none; font-size: 16px; cursor: pointer; margin-top: 20px; }
+    </style>
 </head>
 <body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <!-- Imagem simulando a logo -->
+        <img src="https://via.placeholder.com/300x100?text=HamburgueriaZ" alt="Logo HamburgueriaZ" style="max-width: 100%;">
+    </div>
 
-  <h1>Exemplo de Página Responsiva</h1>
+    <div class="estilo-texto">Faça seu pedido</div>
+    <input type="text" id="nomeCliente" placeholder="Nome do cliente">
 
-  <div class="container">
-    <div class="box">Bloco 1</div>
-    <div class="box">Bloco 2</div>
-    <div class="box">Bloco 3</div>
-    <div class="box">Bloco 4</div>
-    <div class="box">Bloco 5</div>
-    <div class="box">Bloco 6</div>
-  </div>
+    <div>
+        <label><input type="checkbox" id="cbBacon"> Bacon (R$ 2,00 )</label>  
 
+        <label><input type="checkbox" id="cbQueijo"> Queijo (R$ 2,00)</label>  
+
+        <label><input type="checkbox" id="cbOnion"> Onion Rings (R$ 3,00)</label>
+    </div>
+
+    <div class="estilo-texto">Quantidade</div>
+    <div class="row">
+        <button onclick="subtrair()">-</button>
+        <span id="txtQuantidade">1</span>
+        <button onclick="somar()">+</button>
+    </div>
+
+    <button class="enviar" onclick="enviarPedido()">Enviar Pedido</button>
+
+    <div class="estilo-texto">Resumo do pedido</div>
+    <div id="resumoPedido" class="resumo">
+        Preço final: R$ 0,00
+    </div>
+
+    <script>
+        let quantidade = 1;
+        const precoBase = 20;
+
+        function somar() {
+            quantidade++;
+            document.getElementById('txtQuantidade').innerText = quantidade;
+        }
+
+        function subtrair() {
+            if (quantidade > 1) { // Impede quantidade negativa ou zero
+                quantidade--;
+                document.getElementById('txtQuantidade').innerText = quantidade;
+            }
+        }
+
+        function enviarPedido() {
+            const nome = document.getElementById('nomeCliente').value;
+            const temBacon = document.getElementById('cbBacon').checked;
+            const temQueijo = document.getElementById('cbQueijo').checked;
+            const temOnion = document.getElementById('cbOnion').checked;
+
+            // Calcula o preço unitário do hambúrguer com os adicionais
+            let precoUnitario = precoBase;
+            if (temBacon) precoUnitario += 2;
+            if (temQueijo) precoUnitario += 2;
+            if (temOnion) precoUnitario += 3;
+            
+            // Multiplica pela quantidade
+            const precoTotal = precoUnitario * quantidade;
+
+            // Monta o texto do resumo
+            const resumoHTML = `
+                Nome do cliente: ${nome || 'Não informado'}  
+
+                Tem Bacon? ${temBacon ? 'Sim' : 'Não'}  
+
+                Tem Queijo? ${temQueijo ? 'Sim' : 'Não'}  
+
+                Tem Onion Rings? ${temOnion ? 'Sim' : 'Não'}  
+
+                Quantidade: ${quantidade}  
+
+                <strong>Preço final: R$ ${precoTotal.toFixed(2)}</strong>
+            `;
+
+            // Exibe na tela
+            document.getElementById('resumoPedido').innerHTML = resumoHTML;
+
+            // Simula o Intent de E-mail (abre o cliente de e-mail padrão do computador/celular)
+            const resumoTexto = `Nome do cliente: ${nome || 'Não informado'}\nTem Bacon? ${temBacon ? 'Sim' : 'Não'}\nTem Queijo? ${temQueijo ? 'Sim' : 'Não'}\nTem Onion Rings? ${temOnion ? 'Sim' : 'Não'}\nQuantidade: ${quantidade}\nPreço final: R$ ${precoTotal.toFixed(2)}`;
+            
+            const assunto = encodeURIComponent(`Pedido de ${nome}`);
+            const corpo = encodeURIComponent(resumoTexto);
+            window.location.href = `mailto:?subject=${assunto}&body=${corpo}`;
+        }
+    </script>
 </body>
 </html>
