@@ -3,46 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HamburgueriaZ</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; max-width: 400px; margin: auto; }
-        .estilo-texto { text-transform: uppercase; font-size: 15px; padding: 16px 0; font-weight: bold; }
-        .row { display: flex; align-items: center; margin-bottom: 10px; }
-        .row button { width: 40px; height: 40px; font-size: 20px; cursor: pointer; }
-        .row span { margin: 0 15px; font-size: 18px; }
-        input[type="text"] { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
-        .resumo { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
-        button.enviar { width: 100%; padding: 15px; background: #28a745; color: white; border: none; font-size: 16px; cursor: pointer; margin-top: 20px; }
-    </style>
+    <title>HamburgueriaZ - App</title>
+    <!-- Conecta com o seu arquivo style.css -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <!-- Imagem simulando a logo -->
-        <img src="https://via.placeholder.com/300x100?text=HamburgueriaZ" alt="Logo HamburgueriaZ" style="max-width: 100%;">
+
+    <!-- Etapa 4: Logo -->
+    <div class="logo-container">
+        <img src="https://via.placeholder.com/600x300/496d89/ffff00?text=HamburgueriaZ" alt="Logo HamburgueriaZ">
     </div>
 
-    <div class="estilo-texto">Faça seu pedido</div>
-    <input type="text" id="nomeCliente" placeholder="Nome do cliente">
+    <!-- Etapa 3: Estilo de Texto Padronizado -->
+    <label class="estilo-texto">Faça seu pedido</label>
+    <input type="text" id="nomeCliente" placeholder="Digite seu nome">
 
-    <div>
-        <label><input type="checkbox" id="cbBacon"> Bacon (R$ 2,00 )</label>  
-
-        <label><input type="checkbox" id="cbQueijo"> Queijo (R$ 2,00)</label>  
-
-        <label><input type="checkbox" id="cbOnion"> Onion Rings (R$ 3,00)</label>
+    <div class="checkbox-group">
+        <div class="checkbox-item">
+            <input type="checkbox" id="cbBacon"> <label for="cbBacon">Bacon (R$ 2,00 )</label>
+        </div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="cbQueijo"> <label for="cbQueijo">Queijo (R$ 2,00)</label>
+        </div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="cbOnion"> <label for="cbOnion">Onion Rings (R$ 3,00)</label>
+        </div>
     </div>
 
-    <div class="estilo-texto">Quantidade</div>
-    <div class="row">
-        <button onclick="subtrair()">-</button>
+    <label class="estilo-texto">Quantidade</label>
+    <div class="quantidade-container">
+        <button class="btn-qtd" onclick="subtrair()">-</button>
         <span id="txtQuantidade">1</span>
-        <button onclick="somar()">+</button>
+        <button class="btn-qtd" onclick="somar()">+</button>
     </div>
 
-    <button class="enviar" onclick="enviarPedido()">Enviar Pedido</button>
+    <!-- Etapa 6: Botão Enviar -->
+    <button class="btn-enviar" onclick="enviarPedido()">Enviar Pedido</button>
 
-    <div class="estilo-texto">Resumo do pedido</div>
-    <div id="resumoPedido" class="resumo">
+    <label class="estilo-texto">Resumo do pedido</label>
+    <div id="resumoPedido" class="resumo-box">
         Preço final: R$ 0,00
     </div>
 
@@ -56,7 +55,7 @@
         }
 
         function subtrair() {
-            if (quantidade > 1) { // Impede quantidade negativa ou zero
+            if (quantidade > 1) {
                 quantidade--;
                 document.getElementById('txtQuantidade').innerText = quantidade;
             }
@@ -68,37 +67,24 @@
             const temQueijo = document.getElementById('cbQueijo').checked;
             const temOnion = document.getElementById('cbOnion').checked;
 
-            // Calcula o preço unitário do hambúrguer com os adicionais
             let precoUnitario = precoBase;
             if (temBacon) precoUnitario += 2;
             if (temQueijo) precoUnitario += 2;
             if (temOnion) precoUnitario += 3;
             
-            // Multiplica pela quantidade
             const precoTotal = precoUnitario * quantidade;
 
-            // Monta o texto do resumo
-            const resumoHTML = `
-                Nome do cliente: ${nome || 'Não informado'}  
+            const resumoTexto = `Nome do cliente: ${nome || 'Cliente'}\n` +
+                                `Tem Bacon? ${temBacon ? 'Sim' : 'Não'}\n` +
+                                `Tem Queijo? ${temQueijo ? 'Sim' : 'Não'}\n` +
+                                `Tem Onion Rings? ${temOnion ? 'Sim' : 'Não'}\n` +
+                                `Quantidade: ${quantidade}\n` +
+                                `Preço final: R$ ${precoTotal.toFixed(2)}`;
 
-                Tem Bacon? ${temBacon ? 'Sim' : 'Não'}  
+            document.getElementById('resumoPedido').innerText = resumoTexto;
 
-                Tem Queijo? ${temQueijo ? 'Sim' : 'Não'}  
-
-                Tem Onion Rings? ${temOnion ? 'Sim' : 'Não'}  
-
-                Quantidade: ${quantidade}  
-
-                <strong>Preço final: R$ ${precoTotal.toFixed(2)}</strong>
-            `;
-
-            // Exibe na tela
-            document.getElementById('resumoPedido').innerHTML = resumoHTML;
-
-            // Simula o Intent de E-mail (abre o cliente de e-mail padrão do computador/celular)
-            const resumoTexto = `Nome do cliente: ${nome || 'Não informado'}\nTem Bacon? ${temBacon ? 'Sim' : 'Não'}\nTem Queijo? ${temQueijo ? 'Sim' : 'Não'}\nTem Onion Rings? ${temOnion ? 'Sim' : 'Não'}\nQuantidade: ${quantidade}\nPreço final: R$ ${precoTotal.toFixed(2)}`;
-            
-            const assunto = encodeURIComponent(`Pedido de ${nome}`);
+            // Simula o Intent de E-mail
+            const assunto = encodeURIComponent(`Pedido de ${nome || 'Cliente'}`);
             const corpo = encodeURIComponent(resumoTexto);
             window.location.href = `mailto:?subject=${assunto}&body=${corpo}`;
         }
